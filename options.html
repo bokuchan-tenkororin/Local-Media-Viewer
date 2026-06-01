@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title data-i18n="optionsPageTitle">Local Media Viewer Options</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; width: 450px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    textarea { width: 100%; height: 150px; margin-bottom: 10px; padding: 5px; box-sizing: border-box; }
+    input[type="number"] { width: 80px; padding: 5px; margin-bottom: 10px; }
+    .option-group { margin-bottom: 20px; border: 1px solid #eee; padding: 15px; border-radius: 5px; background-color: #fcfcfc; }
+    .option-group h2 { margin-top: 0; font-size: 1.2em; color: #333; }
+    .radio-group label { display: inline-block; margin-right: 15px; font-weight: normal; }
+    button { padding: 8px 15px; margin-top: 10px; margin-right: 8px; }
+    #defaultFolderPath { font-family: monospace; background: #f0f0f0; padding: 6px 8px; border-radius: 4px; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1 data-i18n="optionsHeader">Local Media Viewer Settings</h1>
+  <div class="option-group">
+    <h2 data-i18n="defaultFolderHeading">Default Folder</h2>
+    <p id="defaultFolderPath" data-i18n="notSet">Not set</p>
+    <button id="setDefaultFolderBtn" data-i18n="chooseDefaultFolderBtn">Choose Default Folder</button>
+    <button id="clearDefaultFolderBtn" data-i18n="clearBtn">Clear</button>
+    <p style="font-size:0.9em;color:#666;margin-top:8px;" data-i18n="defaultFolderHelp">When set, the tree for this folder will be shown automatically when you click the extension icon.</p>
+  </div>
+  <div class="option-group">
+    <label for="hidePatterns" data-i18n="hidePatternsLabel">Patterns to hide (regular expressions, one per line):</label>
+    <textarea id="hidePatterns" rows="3" style="height:5.5em;"></textarea>
+    <p data-i18n-html="hidePatternsExample">Example: <code>(^|/)\..*</code> (hidden files and folders), <code>(^|/)\.git($|/.*)</code> (entire Git files/folders)</p>
+  </div>
+  <div class="option-group">
+    <h2 data-i18n="slideshowSettingsHeading">Slideshow Settings</h2>
+    <label for="slideshowInterval" data-i18n="intervalLabel">Interval (seconds):</label>
+    <input type="number" id="slideshowInterval" min="1" value="3"> <span data-i18n="secondsSuffix">seconds</span>
+    <br>
+    <label data-i18n="orderLabel">Order:</label>
+    <div class="radio-group">
+      <label><input type="radio" name="slideshowOrder" value="ascending"> <span data-i18n="ascending">Ascending</span></label>
+      <label><input type="radio" name="slideshowOrder" value="descending"> <span data-i18n="descending">Descending</span></label>
+      <label><input type="radio" name="slideshowOrder" value="random"> <span data-i18n="random">Random</span></label>
+    </div>
+  </div>
+  <div class="option-group">
+    <h2 data-i18n="displaySettingsHeading">Display Settings</h2>
+    <label><input type="checkbox" id="showFilename"> <span data-i18n="showFilenameLabel">Show filename when displaying images</span></label>
+  </div>
+  <button id="saveBtn" data-i18n="saveBtn">Save</button>
+  <script src="options.js"></script>
+</body>
+</html>

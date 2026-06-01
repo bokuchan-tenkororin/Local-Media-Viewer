@@ -1,0 +1,112 @@
+{
+  "appName": {
+    "message": "Local Media Viewer"
+  },
+  "appDesc": {
+    "message": "Local Media Viewer"
+  },
+  "extensionName": {
+    "message": "Local Media Viewer"
+  },
+  "viewerTitle": {
+    "message": "Local Media Viewer"
+  },
+  "chooseFolderBtn": {
+    "message": "フォルダを選択"
+  },
+  "slideshowBtn": {
+    "message": "スライドショー"
+  },
+  "sidebarToggleAria": {
+    "message": "サイドバーを切り替え"
+  },
+  "emptyStateTitle": {
+    "message": "ファイルを選択"
+  },
+  "emptyStateDesc": {
+    "message": "左のツリーからファイルを選択するか、上の「フォルダを選択」をクリックしてください。"
+  },
+  "selectFromTree": {
+    "message": "ツリーからファイルを選択してください。"
+  },
+  "defaultFolderPermissionNeeded": {
+    "message": "デフォルトフォルダの権限が必要です。"
+  },
+  "optionsPageTitle": {
+    "message": "Local Media Viewer オプション"
+  },
+  "optionsHeader": {
+    "message": "Local Media Viewer 設定"
+  },
+  "defaultFolderHeading": {
+    "message": "デフォルトフォルダ"
+  },
+  "notSet": {
+    "message": "未設定"
+  },
+  "chooseDefaultFolderBtn": {
+    "message": "デフォルトフォルダの選択"
+  },
+  "clearBtn": {
+    "message": "クリア"
+  },
+  "defaultFolderHelp": {
+    "message": "設定すると、拡張機能アイコンをクリックしたときに自動でこのフォルダのツリーが表示されます。"
+  },
+  "hidePatternsLabel": {
+    "message": "非表示にするパターン (正規表現、1行1パターン):"
+  },
+  "hidePatternsExample": {
+    "message": "例: <code>(^|/)\\..*</code> (隠しファイルやフォルダ), <code>(^|/)\\.git($|/.*)</code> (Git関連ファイル/フォルダ全体)"
+  },
+  "slideshowSettingsHeading": {
+    "message": "スライドショー設定"
+  },
+  "intervalLabel": {
+    "message": "表示間隔 (秒):"
+  },
+  "secondsSuffix": {
+    "message": "秒"
+  },
+  "orderLabel": {
+    "message": "表示順序:"
+  },
+  "ascending": {
+    "message": "昇順"
+  },
+  "descending": {
+    "message": "降順"
+  },
+  "random": {
+    "message": "ランダム"
+  },
+  "displaySettingsHeading": {
+    "message": "表示設定"
+  },
+  "showFilenameLabel": {
+    "message": "画像表示時にファイル名を表示する"
+  },
+  "saveBtn": {
+    "message": "保存"
+  },
+  "unknownName": {
+    "message": "(名称不明)"
+  },
+  "loadError": {
+    "message": "読み込みエラー"
+  },
+  "alertFolderSet": {
+    "message": "デフォルトフォルダを設定しました: $1",
+    "placeholders": {
+      "1": {
+        "content": "$1"
+      }
+    }
+  },
+  "alertFolderCleared": {
+    "message": "デフォルトフォルダをクリアしました。"
+  },
+  "slideshowStop": {
+    "message": "スライドショー停止"
+  }
+}

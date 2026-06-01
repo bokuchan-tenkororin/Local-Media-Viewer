@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title data-i18n="viewerTitle">Local Media Viewer</title>
+<style>
+  :root {
+    --bg: #f6f8fb;
+    --panel: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --selected: #e0ecff;
+  }
+    * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text); font-family: "Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif; }
+  button { font: inherit; color: inherit; }
+  .app { display: flex; height: 100vh; overflow: hidden; }
+  .sidebar { width: 320px; flex-shrink: 0; background: var(--panel); border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+  .sidebar-header { padding: 12px; border-bottom: none; display:flex; gap:8px; align-items:center; }
+  .sidebar-header .btn { flex:0 0 auto; }
+  #chooseFolderBtn { flex:1; min-width:0; }
+  #slideshowBtn { flex:0 0 140px; width:140px; white-space:nowrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel); cursor: pointer; transition: all .15s ease; font-size: 14px; font-weight: 500; }
+  .btn:hover { background: #f9fafb; border-color: #d1d5db; }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn-ghost { border-color: transparent; background: transparent; }
+  .btn-ghost:hover { background: #f3f4f6; }
+  .tree-container { flex: 1; overflow: auto; padding: 8px 6px 16px; }
+  #treeRoot { margin: 0; padding: 0 0 0 6px; list-style: none; }
+  ul { list-style: none; margin: 0; padding-left: 18px; }
+  li { margin: 2px 0; }
+  .tree-item { display: flex; align-items: center; gap: 4px; border-radius: 8px; padding: 4px 6px; }
+  .tree-item:hover { background: #f3f4f6; }
+  li.selected > .tree-item { background: var(--selected); }
+  .toggle { width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); font-size: 12px; user-select: none; flex-shrink: 0; }
+  .folder > .tree-item > .toggle::before { content: "▼"; }
+  .folder.collapsed > .tree-item > .toggle::before { content: "▶"; }
+  .folder.collapsed > ul { display: none; }
+  .name { cursor: pointer; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 14px; padding: 2px 4px; border-radius: 6px; }
+  .file .toggle { visibility: hidden; }
+  .main { flex: 1; display: flex; flex-direction: column; min-width: 0; background: var(--bg); position:relative; }
+  .toolbar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--bg); border-bottom: none; position: sticky; top: 0; z-index: 5; }
+  .toolbar .spacer { flex: 1; }
+  #imageNavigation { position:absolute; bottom:24px; right:24px; display:none; align-items:center; gap:6px; padding:6px; border-radius:12px; background:rgba(0,0,0,0.35); backdrop-filter:blur(4px); z-index:10; }
+  #imageNavigation .btn { background:rgba(255,255,255,0.9); border-color:transparent; min-width:40px; padding:8px 12px; }
+  #imageNavigation .btn:hover { background:#fff; }
+  #mainContent { flex: 1; overflow: auto; padding: 24px; display: flex; flex-direction: column; }
+  #mainContent h3 { margin: 0 0 12px; font-size: 16px; }
+  .media-container { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+  .media-container img, .media-container video { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+  .media-container img.landscape, .media-container video.landscape { width: 100%; height: auto; }
+  .media-container img.portrait, .media-container video.portrait { width: auto; height: 100%; }
+  .empty-state { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); text-align: center; gap: 12px; }
+  .empty-state h2 { margin: 0; font-size: 18px; color: var(--text); font-weight: 600; }
+  .sidebar-toggle { display: none; }
+
+  .menu-item { display:block; width:100%; text-align:left; padding:10px 14px; border:none; background:transparent; cursor:pointer; font-size:14px; }
+  .menu-item:hover { background:#f3f4f6; }
+  #videoMenuDropdown { position:absolute; top:48px; right:14px; background:var(--panel); border:1px solid var(--border); border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); z-index:20; min-width:220px; padding:4px 0; }
+
+  @media (max-width: 900px) {
+    .sidebar { position: fixed; left: 0; top: 0; bottom: 0; z-index: 40; box-shadow: 0 10px 30px rgba(0,0,0,.1); transform: translateX(-100%); transition: transform .25s ease; }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-toggle { display: inline-flex; }
+  }
+  #mainContent pre { font-size:14px; font-family: inherit; white-space: pre-wrap; word-break: break-word; margin:0; }
+  #mainContent h3 { font-size:16px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <button id="chooseFolderBtn" class="btn btn-primary" type="button" data-i18n="chooseFolderBtn">Choose Folder</button>
+      <button id="slideshowBtn" class="btn" type="button" style="visibility:hidden;" data-i18n="slideshowBtn">Slideshow</button>
+    </div>
+    <div class="tree-container">
+      <ul id="treeRoot"></ul>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="toolbar">
+      <button id="sidebarToggle" class="btn btn-ghost sidebar-toggle" type="button" data-i18n-title="sidebarToggleAria" aria-label="Toggle sidebar">☰</button>
+      <div class="spacer"></div>
+</div>
+    <div id="imageNavigation">
+      <button id="prevImageBtn" class="btn" type="button">◁</button>
+      <button id="nextImageBtn" class="btn" type="button">▷</button>
+    </div>
+    <div id="mainContent">
+      <div class="empty-state">
+        <h2 data-i18n="emptyStateTitle">Select a file</h2>
+        <p class="muted" data-i18n="emptyStateDesc">Choose a file from the tree on the left, or start by clicking "Choose Folder" above.</p>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="viewer.js"></script>
+</body>
+</html>

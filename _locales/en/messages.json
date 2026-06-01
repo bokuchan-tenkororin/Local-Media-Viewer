@@ -1,0 +1,112 @@
+{
+  "appName": {
+    "message": "Local Media Viewer"
+  },
+  "appDesc": {
+    "message": "Local Media Viewer"
+  },
+  "extensionName": {
+    "message": "Local Media Viewer"
+  },
+  "viewerTitle": {
+    "message": "Local Media Viewer"
+  },
+  "chooseFolderBtn": {
+    "message": "Choose Folder"
+  },
+  "slideshowBtn": {
+    "message": "Slideshow"
+  },
+  "sidebarToggleAria": {
+    "message": "Toggle sidebar"
+  },
+  "emptyStateTitle": {
+    "message": "Select a file"
+  },
+  "emptyStateDesc": {
+    "message": "Choose a file from the tree on the left, or start by clicking \"Choose Folder\" above."
+  },
+  "selectFromTree": {
+    "message": "Select a file from the tree."
+  },
+  "defaultFolderPermissionNeeded": {
+    "message": "Permission is needed for the default folder."
+  },
+  "optionsPageTitle": {
+    "message": "Local Media Viewer Options"
+  },
+  "optionsHeader": {
+    "message": "Local Media Viewer Settings"
+  },
+  "defaultFolderHeading": {
+    "message": "Default Folder"
+  },
+  "notSet": {
+    "message": "Not set"
+  },
+  "chooseDefaultFolderBtn": {
+    "message": "Choose Default Folder"
+  },
+  "clearBtn": {
+    "message": "Clear"
+  },
+  "defaultFolderHelp": {
+    "message": "When set, the tree for this folder will be shown automatically when you click the extension icon."
+  },
+  "hidePatternsLabel": {
+    "message": "Patterns to hide (regular expressions, one per line):"
+  },
+  "hidePatternsExample": {
+    "message": "Example: <code>(^|/)\\..*</code> (hidden files and folders), <code>(^|/)\\.git($|/.*)</code> (entire Git files/folders)"
+  },
+  "slideshowSettingsHeading": {
+    "message": "Slideshow Settings"
+  },
+  "intervalLabel": {
+    "message": "Interval (seconds):"
+  },
+  "secondsSuffix": {
+    "message": "seconds"
+  },
+  "orderLabel": {
+    "message": "Order:"
+  },
+  "ascending": {
+    "message": "Ascending"
+  },
+  "descending": {
+    "message": "Descending"
+  },
+  "random": {
+    "message": "Random"
+  },
+  "displaySettingsHeading": {
+    "message": "Display Settings"
+  },
+  "showFilenameLabel": {
+    "message": "Show filename when displaying images"
+  },
+  "saveBtn": {
+    "message": "Save"
+  },
+  "unknownName": {
+    "message": "(Unknown)"
+  },
+  "loadError": {
+    "message": "Load error"
+  },
+  "alertFolderSet": {
+    "message": "Default folder set: $1",
+    "placeholders": {
+      "1": {
+        "content": "$1"
+      }
+    }
+  },
+  "alertFolderCleared": {
+    "message": "Default folder cleared."
+  },
+  "slideshowStop": {
+    "message": "Stop Slideshow"
+  }
+}
